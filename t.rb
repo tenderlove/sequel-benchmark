@@ -24,204 +24,192 @@ if ARGV.last == 'plugin'
 end
 
 if ARGV.first == 'eager_initialize'
+  module Sequel::Model::InstanceMethods
+    def init_with values
+      @values = values
+      @new = nil
+      @modified = nil
+      @singleton_setter_added = nil
+      @errors = nil
+      @this = nil
+      @server = nil
+      @skip_validation_on_next_save = nil
+      @changed_columns = nil
+    end
+  end
+
   module Sequel::Model::ClassMethods
     def call(values)
       o = allocate
-      o.instance_variable_set(:@values, values)
-      o.instance_variable_set(:@new, nil)
-      o.instance_variable_set(:@modified, nil)
-      o.instance_variable_set(:@singleton_setter_added, nil)
-      o.instance_variable_set(:@errors, nil)
-      o.instance_variable_set(:@this, nil)
-      o.instance_variable_set(:@server, nil)
-      o.instance_variable_set(:@skip_validation_on_next_save, nil)
-      o.instance_variable_set(:@changed_columns, nil)
+      o.init_with values
       o
     end
-  end 
+  end
 
-  module Sequel::Model::Associations::ClassMethods
-    def call(values)
-      o = super
-      o.instance_variable_set(:@associations, nil)
-      o.instance_variable_set(:@set_associated_object_if_same, nil)
-      o
+  module Sequel::Model::Associations::InstanceMethods
+    def init_with(values)
+      super
+      @associations = nil
+      @set_associated_object_if_same = nil
     end
   end
 
   if ARGV.last == 'plugin'
     module Sequel::Plugins
       module AccessedColumns
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@accessed_columns, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @accessed_columns = nil
           end
         end
       end
 
       module ActiveModel
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@_to_partial_path, nil)
-            o.instance_variable_set(:@destroyed, nil)
-            o.instance_variable_set(:@rollback_checker, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @_to_partial_path = nil
+            @destroyed = nil
+            @rollback_checker = nil
           end
         end
       end
 
       module AssociationPks
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@_association_pks, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @_association_pks = nil
           end
         end
       end
 
       module AutoValidations
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@_skip_auto_validations, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @_skip_auto_validations = nil
           end
         end
       end
 
       module ColumnsUpdated
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@columns_updated, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @columns_updated = nil
           end
         end
       end
 
       module Composition
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@compositions, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @compositions = nil
           end
         end
       end
 
       module Dirty
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@initial_values, nil)
-            o.instance_variable_set(:@missing_initial_values, nil)
-            o.instance_variable_set(:@previous_changes, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @initial_values = nil
+            @missing_initial_values = nil
+            @previous_changes = nil
           end
         end
       end
 
       module ForbidLazyLoad
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@forbid_lazy_load, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @forbid_lazy_load = nil
           end
         end
       end
 
       module InsertConflict
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@insert_conflict_opts, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @insert_conflict_opts = nil
           end
         end
       end
 
       module InstanceFilters
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@instance_filters, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @instance_filters = nil
           end
         end
       end
 
       module InstanceHooks
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@instance_hooks, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @instance_hooks = nil
           end
         end
       end
 
       module JsonSerializer
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@json_serializer_opts, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @json_serializer_opts = nil
           end
         end
       end
 
       module Serialization
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@deserialized_values, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @deserialized_values = nil
           end
         end
       end
 
       module SerializationModificationDetection
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@original_deserialized_values, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @original_deserialized_values = nil
           end
         end
       end
 
       module TacticalEagerLoading
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@retrieved_by, nil)
-            o.instance_variable_set(:@retrieved_with, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @retrieved_by = nil
+            @retrieved_with = nil
           end
         end
       end
 
       module UpdatePrimaryKey
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@pk_hash, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @pk_hash = nil
           end
         end
       end
 
       module ValidationContexts
-        module ClassMethods
-          def call(values)
-            o = super
-            o.instance_variable_set(:@validation_context, nil)
-            o
+        module InstanceMethods
+          def init_with(values)
+            super
+            @validation_context = nil
           end
         end
       end
