@@ -26,15 +26,6 @@ end
 if ARGV.first == 'eager_initialize'
   module Sequel::Model::InstanceMethods
     def init_with values
-      @values = values
-      @new = nil
-      @modified = nil
-      @singleton_setter_added = nil
-      @errors = nil
-      @this = nil
-      @server = nil
-      @skip_validation_on_next_save = nil
-      @changed_columns = nil
     end
   end
 
@@ -49,8 +40,6 @@ if ARGV.first == 'eager_initialize'
   module Sequel::Model::Associations::InstanceMethods
     def init_with(values)
       super
-      @associations = nil
-      @set_associated_object_if_same = nil
     end
   end
 
@@ -60,7 +49,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @accessed_columns = nil
           end
         end
       end
@@ -69,9 +57,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @_to_partial_path = nil
-            @destroyed = nil
-            @rollback_checker = nil
           end
         end
       end
@@ -80,7 +65,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @_association_pks = nil
           end
         end
       end
@@ -89,7 +73,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @_skip_auto_validations = nil
           end
         end
       end
@@ -98,7 +81,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @columns_updated = nil
           end
         end
       end
@@ -107,7 +89,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @compositions = nil
           end
         end
       end
@@ -116,9 +97,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @initial_values = nil
-            @missing_initial_values = nil
-            @previous_changes = nil
           end
         end
       end
@@ -127,7 +105,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @forbid_lazy_load = nil
           end
         end
       end
@@ -136,7 +113,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @insert_conflict_opts = nil
           end
         end
       end
@@ -145,7 +121,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @instance_filters = nil
           end
         end
       end
@@ -154,7 +129,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @instance_hooks = nil
           end
         end
       end
@@ -163,7 +137,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @json_serializer_opts = nil
           end
         end
       end
@@ -172,7 +145,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @deserialized_values = nil
           end
         end
       end
@@ -181,7 +153,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @original_deserialized_values = nil
           end
         end
       end
@@ -190,8 +161,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @retrieved_by = nil
-            @retrieved_with = nil
           end
         end
       end
@@ -200,7 +169,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @pk_hash = nil
           end
         end
       end
@@ -209,7 +177,6 @@ if ARGV.first == 'eager_initialize'
         module InstanceMethods
           def init_with(values)
             super
-            @validation_context = nil
           end
         end
       end
